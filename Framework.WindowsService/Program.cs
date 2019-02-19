@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Extras.Quartz;
+using log4net;
 using log4net.Config;
+using MyJobs;
+using Quartz;
 using Topshelf;
 
 namespace Framework.WindowsService
@@ -20,6 +24,14 @@ namespace Framework.WindowsService
             containerBuilder.RegisterType<MyService>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            containerBuilder.Register(c => LogManager.GetLogger(typeof(Program)))
+                .As<ILog>();
+
+            containerBuilder.RegisterModule(new QuartzAutofacFactoryModule());
+
+            //TODO: Verify the typeof() argument once
+            containerBuilder.RegisterModule(new QuartzAutofacJobsModule(typeof(MyJob).Assembly));
 
             IContainer container = containerBuilder.Build();
 
@@ -42,4 +54,6 @@ namespace Framework.WindowsService
             });
         }
     }
+
+    
 }
