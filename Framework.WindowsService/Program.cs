@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net.Config;
 using Topshelf;
 
 namespace Framework.WindowsService
@@ -11,6 +12,8 @@ namespace Framework.WindowsService
     {
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure();
+
             HostFactory.Run(hostConfigurator =>
             {
                 hostConfigurator.SetServiceName("MyService");
