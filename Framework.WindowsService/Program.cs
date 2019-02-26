@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extras.Quartz;
 using log4net;
 using log4net.Config;
 using MyJobs;
-using Quartz;
 using Topshelf;
 
 namespace Framework.WindowsService
@@ -19,7 +13,7 @@ namespace Framework.WindowsService
         {
             XmlConfigurator.Configure();
 
-            ContainerBuilder containerBuilder= new ContainerBuilder();
+            ContainerBuilder containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterType<MyService>()
                 .AsSelf()
@@ -55,5 +49,5 @@ namespace Framework.WindowsService
         }
     }
 
-    
+
 }
