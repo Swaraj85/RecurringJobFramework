@@ -48,6 +48,6 @@ namespace Framework.WindowsService
             });
         }
     }
-
+     // Added new comment
 
 }
